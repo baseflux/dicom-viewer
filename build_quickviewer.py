@@ -243,7 +243,8 @@ def create_thumbnail(frame: Path, root: Path, viewer_dir: Path, series: Path, wi
     thumb_dir = viewer_dir / "thumbnails" / rel_series
     thumb_dir.mkdir(parents=True, exist_ok=True)
     dest = thumb_dir / f"{frame.stem}.jpg"
-    if not dest.exists() or dest.stat().st_mtime < frame.stat().st_mtime:
+    needs_write = grayscale or not dest.exists() or dest.stat().st_mtime < frame.stat().st_mtime
+    if needs_write:
         with Image.open(frame) as img:
             img = img.convert("RGB")
             max_dim = 65500
