@@ -183,12 +183,17 @@ def read_series_info(series_dir: Path) -> Dict[str, str]:
     return info
 
 
-GRAYSCALE_BUCKETS = {
+GRAYSCALE_BUCKET_SUBSTRINGS = (
     "03_neuro_brain",
     "05_urology",
-    "20251031_CT_Extremity_y_3D",
-    "20251031_CT_Extremity_y_3D_2",
-}
+    "20251031_ct_extremity",
+    "_ct_extremity",
+)
+
+
+def is_grayscale_bucket(surgery: str) -> bool:
+    norm = surgery.lower()
+    return any(substr in norm for substr in GRAYSCALE_BUCKET_SUBSTRINGS)
 
 
 def build_manifest(root: Path, viewer_dir: Path, max_frames: Optional[int], thumb_width: int, thumb_quality: int) -> Dict[str, List[Dict]]:
@@ -206,7 +211,7 @@ def build_manifest(root: Path, viewer_dir: Path, max_frames: Optional[int], thum
                     selected = frames[:max_frames]
                 else:
                     selected = frames
-                grayscale = surgery in GRAYSCALE_BUCKETS
+                grayscale = is_grayscale_bucket(surgery.name)
                 rel_frames = [
                     os.path.relpath(
                         str(create_thumbnail(frame, root, viewer_dir, series, thumb_width, thumb_quality, grayscale)),
@@ -240,18 +245,19 @@ def create_thumbnail(frame: Path, root: Path, viewer_dir: Path, series: Path, wi
     dest = thumb_dir / f"{frame.stem}.jpg"
     if not dest.exists() or dest.stat().st_mtime < frame.stat().st_mtime:
         with Image.open(frame) as img:
+            img = img.convert("RGB")
+            max_dim = 65500
+            scale = min(1.0, width / img.width if img.width else 1.0, max_dim / img.height if img.height else 1.0)
+            if scale < 1.0:
+                new_width = max(1, int(img.width * scale))
+                new_height = max(1, int(img.height * scale))
+                img = img.resize((new_width, new_height), Image.LANCZOS)
             if grayscale:
                 gray = ImageOps.grayscale(img)
-                if gray.width > width:
-                    height = int(width * (gray.height / gray.width))
-                    gray = gray.resize((width, height), Image.LANCZOS)
                 gray = ImageOps.autocontrast(gray, cutoff=1)
                 img_out = gray.convert("RGB")
             else:
-                img_out = img.convert("RGB")
-                if img_out.width > width:
-                    height = int(width * (img_out.height / img_out.width))
-                    img_out = img_out.resize((width, height), Image.LANCZOS)
+                img_out = img
             img_out.save(dest, format="JPEG", quality=quality, optimize=True, progressive=True)
     return dest
 
