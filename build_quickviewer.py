@@ -54,6 +54,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       border-color: #9f7bff;
       box-shadow: 0 0 20px rgba(159, 123, 255, 0.4);
     }
+    article.still {
+      border-width: 2px;
+      border-color: #ff9e00;
+      box-shadow: 0 0 20px rgba(255, 158, 0, 0.35);
+    }
     article:hover {
       border-color: #449af7;
     }
@@ -74,6 +79,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       padding: 0.15rem 0.5rem;
       border-radius: 999px;
       background: #2d313c;
+      border: 1px solid transparent;
+      transition: border-color 0.2s ease;
     }
     .info {
       font-size: 0.75rem;
@@ -93,18 +100,21 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       font-size: 0.9rem;
     }
     .badge.animation-label {
-      border-radius: 0.35rem;
-      padding: 0.25rem 0.6rem;
-      background: rgba(159, 123, 255, 0.2);
+      border-color: #9f7bff;
       color: #fef5ff;
-      border: 1px solid #9f7bff;
+      background: rgba(159, 123, 255, 0.2);
+    }
+    .badge.still-label {
+      border-color: #ff9e00;
+      color: #fff0d8;
+      background: rgba(255, 158, 0, 0.2);
     }
   </style>
 </head>
 <body>
   <h1>Local DICOM Quickviewer</h1>
   <p>Auto-generated from the organized `dicom_01` tree.</p>
-  <div class="note">Purple-bordered cards with a purple “ANIMATION” badge mean tap/hover to scrub through frames; stills keep the default border.</div>
+  <div class="note">Purple-bordered cards with purple badges are animations—tap/hover to scrub. Orange-bordered cards label stills.</div>
   <div id="series">Loading…</div>
   <script>
     const manifestPath = "manifest.json";
@@ -133,6 +143,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         badge.textContent = entry.type.toUpperCase();
         const count = document.createElement("span");
         count.textContent = `${entry.frame_count} frame${entry.frame_count === 1 ? "" : "s"}`;
+        const isAnimation = entry.type === "animation" && entry.frames.length > 1;
+        const isStill = entry.frame_count <= 1;
         const meta = document.createElement("div");
         meta.className = "meta";
         meta.append(badge, count);
@@ -143,7 +155,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
           infobox.textContent += "\\n" + entry.info_text;
         }
         card.append(meta, infobox);
-        if (entry.type === "animation" && entry.frames.length > 1) {
+        if (isAnimation) {
           badge.classList.add("animation-label");
           img.style.cursor = "ew-resize";
           card.classList.add("animation");
@@ -175,6 +187,10 @@ HTML_TEMPLATE = """<!DOCTYPE html>
               setFrame(Math.floor(ratio * (frameCount - 1)));
             }
           }, { passive: false });
+        }
+        if (isStill) {
+          badge.classList.add("still-label");
+          card.classList.add("still");
         }
         container.appendChild(card);
       });
