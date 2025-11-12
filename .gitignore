@@ -1,0 +1,6 @@
+.DS_Store
+DICOM/
+dicom_01/
+viewer/thumbnails/
+docs/thumbnails/
+.venv/
