@@ -47,7 +47,12 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
-      transition: border-color 0.2s ease;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    article.animation {
+      border-width: 2px;
+      border-color: #9f7bff;
+      box-shadow: 0 0 20px rgba(159, 123, 255, 0.4);
     }
     article:hover {
       border-color: #449af7;
@@ -77,11 +82,22 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       max-height: 5rem;
       overflow: hidden;
     }
+    .note {
+      margin: 0;
+      margin-bottom: 1rem;
+      padding: 0.65rem 1rem;
+      border: 1px dashed #9f7bff;
+      border-radius: 0.65rem;
+      background: #1f2233;
+      color: #e9e0ff;
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 <body>
   <h1>Local DICOM Quickviewer</h1>
   <p>Auto-generated from the organized `dicom_01` tree.</p>
+  <div class="note">Purple-bordered cards are animations—hover or touch them to scrub through frames.</div>
   <div id="series">Loading…</div>
   <script>
     const manifestPath = "manifest.json";
@@ -122,6 +138,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         card.append(meta, infobox);
         if (entry.type === "animation" && entry.frames.length > 1) {
           img.style.cursor = "ew-resize";
+          card.classList.add("animation");
           const frames = entry.frames;
           const frameCount = frames.length;
           const setFrame = index => {
