@@ -92,12 +92,19 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       color: #e9e0ff;
       font-size: 0.9rem;
     }
+    .badge.animation-label {
+      border-radius: 0.35rem;
+      padding: 0.25rem 0.6rem;
+      background: rgba(159, 123, 255, 0.2);
+      color: #fef5ff;
+      border: 1px solid #9f7bff;
+    }
   </style>
 </head>
 <body>
   <h1>Local DICOM Quickviewer</h1>
   <p>Auto-generated from the organized `dicom_01` tree.</p>
-  <div class="note">Purple-bordered cards are animations—hover or touch them to scrub through frames.</div>
+  <div class="note">Purple-bordered cards with a purple “ANIMATION” badge mean tap/hover to scrub through frames; stills keep the default border.</div>
   <div id="series">Loading…</div>
   <script>
     const manifestPath = "manifest.json";
@@ -137,6 +144,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         }
         card.append(meta, infobox);
         if (entry.type === "animation" && entry.frames.length > 1) {
+          badge.classList.add("animation-label");
           img.style.cursor = "ew-resize";
           card.classList.add("animation");
           const frames = entry.frames;
