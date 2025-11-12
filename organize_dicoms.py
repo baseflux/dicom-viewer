@@ -115,6 +115,40 @@ KEYWORDS = {
 
 UNSORTED_FIELDS = ("StudyDescription", "SeriesDescription", "ProtocolName", "BodyPartExamined")
 
+BODY_PART_GROUPS = {
+    "BRAIN": "03_neuro_brain",
+    "SPINE": "03_neuro_spine",
+    "C_SPINE": "03_neuro_spine",
+    "JAW": "03_neuro",
+    "HEAD": "03_neuro",
+    "PELVIS": "04_pelvis",
+    "ABDOMEN": "04_abdomen",
+    "CHEST": "04_chest",
+    "THORAX": "04_chest",
+    "TESTIS": "05_urology",
+    "SCROTUM": "05_urology",
+    "PROSTATE": "05_urology",
+    "KNEE": "06_lowerlimb",
+    "HIP": "06_lowerlimb",
+    "LEG": "06_lowerlimb",
+    "FOOT": "06_lowerlimb",
+    "HAND": "07_upperlimb",
+    "ARM": "07_upperlimb",
+    "FOREARM": "07_upperlimb",
+    "BICEP": "07_upperlimb",
+    "SHOULDER": "01_surg_shoulder",
+    "ANKLE": "02_surg_ankle",
+    "CLAVICLE": "01_surg_shoulder",
+}
+
+
+def categorize_body_part(ds) -> str:
+    text = " ".join(str(getattr(ds, attr, "")) for attr in UNSORTED_FIELDS).upper()
+    for keyword, label in BODY_PART_GROUPS.items():
+        if keyword in text:
+            return label
+    return ""
+
 
 def normalize_unsorted_label(ds) -> str:
     pieces = []
@@ -123,12 +157,12 @@ def normalize_unsorted_label(ds) -> str:
         if value:
             pieces.append(value)
     if not pieces:
-        return "_unsorted"
-    identifier = " ".join(dict.fromkeys(pieces))  # preserve order, drop duplicates
+        return "misc"
+    identifier = " ".join(dict.fromkeys(pieces))
     study_date = str(getattr(ds, "StudyDate", "") or "")
     if study_date:
         identifier = f"{study_date} {identifier}"
-    return sanitize(identifier, default="_unsorted")
+    return sanitize(identifier, default="misc")
 
 
 def in_range(date: str, lo: str, hi: str) -> bool:
@@ -153,6 +187,10 @@ def classify_surgery(ds, ranges: Dict[str, Tuple[str, str]]) -> str:
     for keyword, label in KEYWORDS.items():
         if keyword in text:
             return label
+
+    body_label = categorize_body_part(ds)
+    if body_label:
+        return body_label
 
     return normalize_unsorted_label(ds)
 
