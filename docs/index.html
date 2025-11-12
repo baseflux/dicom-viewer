@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Local DICOM Quickviewer</title>
+  <style>
+    :root {
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+      background: #101116;
+      color: #f4f4f4;
+    }
+    body {
+      margin: 0;
+      padding: 1rem;
+    }
+    h1 {
+      margin-bottom: 0.5rem;
+    }
+    #series {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    article {
+      background: #171823;
+      border: 1px solid #2f2f3a;
+      border-radius: 0.75rem;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: border-color 0.2s ease;
+    }
+    article:hover {
+      border-color: #449af7;
+    }
+    article img {
+      width: 100%;
+      border-radius: 0.5rem;
+      object-fit: cover;
+      background: #0b0b11;
+    }
+    .meta {
+      font-size: 0.85rem;
+      color: #c7c7c7;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .badge {
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      background: #2d313c;
+    }
+    .info {
+      font-size: 0.75rem;
+      color: #99a0b5;
+      line-height: 1.4;
+      max-height: 5rem;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <h1>Local DICOM Quickviewer</h1>
+  <p>Auto-generated from the organized `dicom_01` tree.</p>
+  <div id="series">Loading…</div>
+  <script>
+    const manifestPath = "manifest.json";
+    fetch(manifestPath)
+      .then(res => res.json())
+      .then(render)
+      .catch(err => {
+        document.getElementById("series").textContent = "Failed to load manifest.";
+        console.error(err);
+      });
+
+    function render(data) {
+      const container = document.getElementById("series");
+      container.innerHTML = "";
+      data.series.forEach(entry => {
+        const card = document.createElement("article");
+        const heading = document.createElement("h2");
+        heading.textContent = `${entry.surgery} · ${entry.modality}`;
+        const img = document.createElement("img");
+        img.src = entry.frames[0] || "";
+        img.alt = entry.series;
+        img.loading = "lazy";
+        card.append(heading, img);
+        const badge = document.createElement("div");
+        badge.className = "badge";
+        badge.textContent = entry.type.toUpperCase();
+        const count = document.createElement("span");
+        count.textContent = `${entry.frame_count} frame${entry.frame_count === 1 ? "" : "s"}`;
+        const meta = document.createElement("div");
+        meta.className = "meta";
+        meta.append(badge, count);
+        const infobox = document.createElement("div");
+        infobox.className = "info";
+        infobox.textContent = entry.series;
+        if (entry.info_text) {
+          infobox.textContent += "\n" + entry.info_text;
+        }
+        card.append(meta, infobox);
+        if (entry.type === "animation" && entry.frames.length > 1) {
+          img.style.cursor = "ew-resize";
+          const frames = entry.frames;
+          const frameCount = frames.length;
+          const setFrame = index => {
+            const safe = Math.max(0, Math.min(frameCount - 1, index));
+            img.src = frames[safe];
+          };
+
+          const scrub = event => {
+            const bounds = img.getBoundingClientRect();
+            const x = event.clientX - bounds.left;
+            const ratio = bounds.width ? Math.max(0, Math.min(1, x / bounds.width)) : 0;
+            setFrame(Math.floor(ratio * (frameCount - 1)));
+          };
+
+          img.addEventListener("mousemove", scrub);
+          img.addEventListener("mouseenter", scrub);
+          img.addEventListener("mouseleave", () => setFrame(0));
+
+          img.addEventListener("touchmove", event => {
+            event.preventDefault();
+            const touch = event.touches[0];
+            if (touch) {
+              const bounds = img.getBoundingClientRect();
+              const x = touch.clientX - bounds.left;
+              const ratio = bounds.width ? Math.max(0, Math.min(1, x / bounds.width)) : 0;
+              setFrame(Math.floor(ratio * (frameCount - 1)));
+            }
+          }, { passive: false });
+        }
+        container.appendChild(card);
+      });
+    }
+  </script>
+</body>
+</html>
