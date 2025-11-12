@@ -144,8 +144,9 @@ BODY_PART_GROUPS = {
 
 def categorize_body_part(ds) -> str:
     text = " ".join(str(getattr(ds, attr, "")) for attr in UNSORTED_FIELDS).upper()
+    norm_text = re.sub(r"[^A-Z0-9]+", " ", text)
     for keyword, label in BODY_PART_GROUPS.items():
-        if keyword in text:
+        if keyword in text or keyword in norm_text:
             return label
     return ""
 
@@ -162,7 +163,10 @@ def normalize_unsorted_label(ds) -> str:
     study_date = str(getattr(ds, "StudyDate", "") or "")
     if study_date:
         identifier = f"{study_date} {identifier}"
-    return sanitize(identifier, default="misc")
+    label = sanitize(identifier, default="misc")
+    normalized = label.upper().replace("UNSORTED", "")
+    normalized = normalized.strip("_")
+    return normalized or "misc"
 
 
 def in_range(date: str, lo: str, hi: str) -> bool:
