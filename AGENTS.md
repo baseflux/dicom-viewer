@@ -4,6 +4,7 @@
 - Keep production code inside `src/` or the `dicom/` package so imports stay predictable; drop-in modules belong beside the package `__init__.py`.
 - Place isolated units and fixtures under `tests/unit/`, wider flows under `tests/integration/`, and reusable assets (schemas, sample data, regulatory notes) in `assets/` or `resources/`.
 - Configuration templates (`configs/`, `.env.example`) document the runtime variables; refer to them before introducing new CLI flags or environment variables.
+- Unsorted DICOM series inherit labels derived from their `StudyDescription`, `SeriesDescription`, `Protocol`, and `BodyPartExamined` metadata, so the exported tree names remain descriptive even when shoulder/ankle heuristics miss a case.
 
 ## Build, Test, and Development Commands
 - `pip install -r requirements.txt` – mirrors what CI installs and should be rerun after dependency changes.

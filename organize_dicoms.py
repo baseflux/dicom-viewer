@@ -113,6 +113,23 @@ KEYWORDS = {
     "TALAR": "02_surg_ankle",
 }
 
+UNSORTED_FIELDS = ("StudyDescription", "SeriesDescription", "ProtocolName", "BodyPartExamined")
+
+
+def normalize_unsorted_label(ds) -> str:
+    pieces = []
+    for attr in UNSORTED_FIELDS:
+        value = str(getattr(ds, attr, "") or "").strip()
+        if value:
+            pieces.append(value)
+    if not pieces:
+        return "_unsorted"
+    identifier = " ".join(dict.fromkeys(pieces))  # preserve order, drop duplicates
+    study_date = str(getattr(ds, "StudyDate", "") or "")
+    if study_date:
+        identifier = f"{study_date} {identifier}"
+    return sanitize(identifier, default="_unsorted")
+
 
 def in_range(date: str, lo: str, hi: str) -> bool:
     if not re.fullmatch(r"\d{8}", date or ""):
@@ -137,7 +154,7 @@ def classify_surgery(ds, ranges: Dict[str, Tuple[str, str]]) -> str:
         if keyword in text:
             return label
 
-    return "_unsorted"
+    return normalize_unsorted_label(ds)
 
 
 def series_key(ds) -> str:
