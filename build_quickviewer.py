@@ -224,19 +224,6 @@ def read_series_info(series_dir: Path) -> Dict[str, str]:
     return info
 
 
-GRAYSCALE_BUCKET_SUBSTRINGS = (
-    "03_neuro_brain",
-    "05_urology",
-    "20251031_ct_extremity",
-    "_ct_extremity",
-)
-
-
-def is_grayscale_bucket(surgery: str) -> bool:
-    norm = surgery.lower()
-    return any(substr in norm for substr in GRAYSCALE_BUCKET_SUBSTRINGS)
-
-
 def build_manifest(root: Path, viewer_dir: Path, max_frames: Optional[int], thumb_width: int, thumb_quality: int) -> Dict[str, List[Dict]]:
     html_base = viewer_dir.resolve()
     series_data: List[Dict] = []
@@ -252,10 +239,9 @@ def build_manifest(root: Path, viewer_dir: Path, max_frames: Optional[int], thum
                     selected = frames[:max_frames]
                 else:
                     selected = frames
-                grayscale = is_grayscale_bucket(surgery.name)
                 rel_frames = [
                     os.path.relpath(
-                        str(create_thumbnail(frame, root, viewer_dir, series, thumb_width, thumb_quality, grayscale)),
+                        str(create_thumbnail(frame, root, viewer_dir, series, thumb_width, thumb_quality)),
                         str(html_base),
                     )
                     for frame in selected
@@ -279,28 +265,25 @@ def build_manifest(root: Path, viewer_dir: Path, max_frames: Optional[int], thum
     }
 
 
-def create_thumbnail(frame: Path, root: Path, viewer_dir: Path, series: Path, width: int, quality: int, grayscale: bool) -> Path:
+def create_thumbnail(frame: Path, root: Path, viewer_dir: Path, series: Path, width: int, quality: int) -> Path:
     rel_series = series.relative_to(root)
     thumb_dir = viewer_dir / "thumbnails" / rel_series
     thumb_dir.mkdir(parents=True, exist_ok=True)
     dest = thumb_dir / f"{frame.stem}.jpg"
-    needs_write = grayscale or not dest.exists() or dest.stat().st_mtime < frame.stat().st_mtime
-    if needs_write:
+    if not dest.exists() or dest.stat().st_mtime < frame.stat().st_mtime:
         with Image.open(frame) as img:
             img = img.convert("RGB")
             max_dim = 65500
-            scale = min(1.0, width / img.width if img.width else 1.0, max_dim / img.height if img.height else 1.0)
+            scale = min(
+                1.0,
+                width / img.width if img.width else 1.0,
+                max_dim / img.height if img.height else 1.0,
+            )
             if scale < 1.0:
                 new_width = max(1, int(img.width * scale))
                 new_height = max(1, int(img.height * scale))
                 img = img.resize((new_width, new_height), Image.LANCZOS)
-            if grayscale:
-                gray = ImageOps.grayscale(img)
-                gray = ImageOps.autocontrast(gray, cutoff=1)
-                img_out = gray.convert("RGB")
-            else:
-                img_out = img
-            img_out.save(dest, format="JPEG", quality=quality, optimize=True, progressive=True)
+            img.save(dest, format="JPEG", quality=quality, optimize=True, progressive=True)
     return dest
 
 
