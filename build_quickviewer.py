@@ -11,7 +11,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional
 
-from PIL import Image
+from PIL import Image, ImageOps
 
 Image.MAX_IMAGE_PIXELS = None
 
@@ -231,9 +231,13 @@ def create_thumbnail(frame: Path, root: Path, viewer_dir: Path, series: Path, wi
     dest = thumb_dir / f"{frame.stem}.jpg"
     if not dest.exists() or dest.stat().st_mtime < frame.stat().st_mtime:
         with Image.open(frame) as img:
-            img = img.convert("RGB")
-            img.thumbnail((width, width * 2), Image.LANCZOS)
-            img.save(dest, format="JPEG", quality=quality, optimize=True, progressive=True)
+            gray = ImageOps.grayscale(img)
+            if gray.width > width:
+                height = int(width * (gray.height / gray.width))
+                gray = gray.resize((width, height), Image.LANCZOS)
+            gray = ImageOps.autocontrast(gray, cutoff=1)
+            rgb = gray.convert("RGB")
+            rgb.save(dest, format="JPEG", quality=quality, optimize=True, progressive=True)
     return dest
 
 
