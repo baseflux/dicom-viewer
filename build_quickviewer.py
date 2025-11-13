@@ -89,6 +89,25 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       max-height: 5rem;
       overflow: hidden;
     }
+    .filters {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .filter {
+      padding: 0.4rem 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid #2f2f3a;
+      background: #1f2233;
+      color: #f4f4f4;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    .filter.active {
+      border-color: #9f7bff;
+      background: #2f1e4d;
+    }
     .note {
       margin: 0;
       margin-bottom: 1rem;
@@ -114,10 +133,36 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <body>
   <h1>Local DICOM Quickviewer</h1>
   <p>Auto-generated from the organized `dicom_01` tree.</p>
-  <div class="note">Purple-bordered cards with purple badges keep looping while hovered/touched; orange-bordered cards are stills.</div>
+  <div class="filters">
+    <button class="filter active" data-filter="all">All</button>
+    <button class="filter" data-filter="animation">Animation</button>
+    <button class="filter" data-filter="still">Stills</button>
+  </div>
+  <div class="note">Purple cards loop while hovered; orange cards are stills. Use the filters to focus.</div>
   <div id="series">Loading…</div>
   <script>
+    const container = document.getElementById("series");
+    const filterButtons = document.querySelectorAll(".filter");
+    let activeFilter = "all";
     const manifestPath = "manifest.json";
+    filterButtons.forEach(btn => {
+      btn.addEventListener("click", () => applyFilter(btn.dataset.filter));
+    });
+
+    function applyFilter(type) {
+      activeFilter = type;
+      const cards = container.querySelectorAll("article");
+      cards.forEach(card => {
+        let show = true;
+        if (type === "animation") {
+          show = card.classList.contains("animation");
+        } else if (type === "still") {
+          show = card.classList.contains("still");
+        }
+        card.style.display = show ? "flex" : "none";
+      });
+      filterButtons.forEach(btn => btn.classList.toggle("active", btn.dataset.filter === type));
+    }
     fetch(manifestPath)
       .then(res => res.json())
       .then(render)
@@ -127,7 +172,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       });
 
     function render(data) {
-      const container = document.getElementById("series");
       container.innerHTML = "";
       data.series.forEach(entry => {
         const card = document.createElement("article");
@@ -236,6 +280,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         }
         container.appendChild(card);
       });
+      applyFilter(activeFilter);
     }
   </script>
 </body>
