@@ -90,6 +90,29 @@
       border-color: #9f7bff;
       background: #2f1e4d;
     }
+    .filters,
+    .group-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .filter,
+    .group-filter {
+      padding: 0.4rem 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid #2f2f3a;
+      background: #1f2233;
+      color: #f4f4f4;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    .filter.active,
+    .group-filter.active {
+      border-color: #9f7bff;
+      background: #2f1e4d;
+    }
     .note {
       margin: 0;
       margin-bottom: 1rem;
@@ -120,30 +143,78 @@
     <button class="filter" data-filter="animation">Animation</button>
     <button class="filter" data-filter="still">Stills</button>
   </div>
+  <div class="group-filters">
+    <button class="group-filter active" data-group="all">All Series</button>
+    <button class="group-filter" data-group="surgery01">Surgery 01</button>
+    <button class="group-filter" data-group="surgery02">Surgery 02</button>
+    <button class="group-filter" data-group="xray">X-ray</button>
+    <button class="group-filter" data-group="ct">CT</button>
+    <button class="group-filter" data-group="brain">Brain</button>
+    <button class="group-filter" data-group="chest">Chest</button>
+    <button class="group-filter" data-group="limbs">Limbs</button>
+  </div>
   <div class="note">Purple cards loop while hovered; orange cards are stills. Use the filters to focus.</div>
   <div id="series">Loading…</div>
   <script>
     const container = document.getElementById("series");
-    const filterButtons = document.querySelectorAll(".filter");
-    let activeFilter = "all";
     const manifestPath = "manifest.json";
+    const filterButtons = document.querySelectorAll(".filter");
+    const groupButtons = document.querySelectorAll(".group-filter");
+    let activeFilter = "all";
+    let activeGroup = "all";
     filterButtons.forEach(btn => {
-      btn.addEventListener("click", () => applyFilter(btn.dataset.filter));
+      btn.addEventListener("click", () => {
+        activeFilter = btn.dataset.filter;
+        updateFilterStates();
+      });
+    });
+    groupButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        activeGroup = btn.dataset.group;
+        updateFilterStates();
+      });
     });
 
-    function applyFilter(type) {
-      activeFilter = type;
+    function updateFilterStates() {
+      filterButtons.forEach(btn => btn.classList.toggle("active", btn.dataset.filter === activeFilter));
+      groupButtons.forEach(btn => btn.classList.toggle("active", btn.dataset.group === activeGroup));
+      applyFilters();
+    }
+
+    function applyFilters() {
       const cards = container.querySelectorAll("article");
       cards.forEach(card => {
-        let show = true;
-        if (type === "animation") {
-          show = card.classList.contains("animation");
-        } else if (type === "still") {
-          show = card.classList.contains("still");
-        }
-        card.style.display = show ? "flex" : "none";
+        const typeMatch =
+          activeFilter === "all" ||
+          (activeFilter === "animation" && card.classList.contains("animation")) ||
+          (activeFilter === "still" && card.classList.contains("still"));
+        const groupMatch = activeGroup === "all" || matchesGroup(card, activeGroup);
+        card.style.display = typeMatch && groupMatch ? "flex" : "none";
       });
-      filterButtons.forEach(btn => btn.classList.toggle("active", btn.dataset.filter === type));
+    }
+
+    function matchesGroup(card, group) {
+      const surgery = card.dataset.surgery || "";
+      const modality = card.dataset.modality || "";
+      const seriesName = card.dataset.seriesName || "";
+      switch (group) {
+        case "surgery01":
+          return surgery.startsWith("01") || surgery.includes("surg_shoulder");
+        case "surgery02":
+          return surgery.startsWith("02") || surgery.includes("surg_ankle");
+        case "xray":
+          return modality.includes("xray");
+        case "ct":
+          return modality.includes("ct");
+        case "brain":
+          return surgery.includes("brain") || seriesName.includes("brain");
+        case "chest":
+          return surgery.includes("chest");
+        case "limbs":
+          return surgery.includes("lowerlimb") || surgery.includes("extremity") || seriesName.includes("leg") || seriesName.includes("hip");
+        default:
+          return true;
+      }
     }
     fetch(manifestPath)
       .then(res => res.json())
@@ -164,6 +235,9 @@
         img.src = entry.frames[previewIndex] || entry.preview || "";
         img.alt = entry.series;
         img.loading = "lazy";
+        card.dataset.surgery = entry.surgery?.toLowerCase() || "";
+        card.dataset.modality = entry.modality?.toLowerCase() || "";
+        card.dataset.seriesName = entry.series?.toLowerCase() || "";
         card.append(heading, img);
         const badge = document.createElement("div");
         badge.className = "badge";
