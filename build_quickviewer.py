@@ -114,7 +114,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <body>
   <h1>Local DICOM Quickviewer</h1>
   <p>Auto-generated from the organized `dicom_01` tree.</p>
-  <div class="note">Purple-bordered cards with purple badges are animations—tap/hover to scrub. Orange-bordered cards label stills.</div>
+  <div class="note">Purple-bordered cards with purple badges keep looping while hovered/touched; orange-bordered cards are stills.</div>
   <div id="series">Loading…</div>
   <script>
     const manifestPath = "manifest.json";
@@ -161,11 +161,35 @@ HTML_TEMPLATE = """<!DOCTYPE html>
           card.classList.add("animation");
           const frames = entry.frames;
           const frameCount = frames.length;
+          let idx = 0;
+          let loopHandle = null;
+          let resumeHandle = null;
           const setFrame = index => {
             const safe = Math.max(0, Math.min(frameCount - 1, index));
+            idx = safe;
             img.src = frames[safe];
           };
 
+          const startLoop = () => {
+            if (loopHandle) return;
+            loopHandle = setInterval(() => {
+              setFrame((idx + 1) % frameCount);
+            }, 600);
+          };
+          const stopLoop = () => {
+            if (loopHandle) {
+              clearInterval(loopHandle);
+              loopHandle = null;
+            }
+          };
+          const scheduleResume = () => {
+            if (resumeHandle) {
+              clearTimeout(resumeHandle);
+            }
+            resumeHandle = setTimeout(() => {
+              startLoop();
+            }, 800);
+          };
           const scrub = event => {
             const bounds = img.getBoundingClientRect();
             const x = event.clientX - bounds.left;
@@ -173,9 +197,24 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             setFrame(Math.floor(ratio * (frameCount - 1)));
           };
 
-          img.addEventListener("mousemove", scrub);
-          img.addEventListener("mouseenter", scrub);
-          img.addEventListener("mouseleave", () => setFrame(0));
+          const handleMouseMove = event => {
+            scrub(event);
+            stopLoop();
+            scheduleResume();
+          };
+
+          img.addEventListener("mousemove", handleMouseMove);
+          img.addEventListener("mouseenter", event => {
+            scrub(event);
+            startLoop();
+          });
+          img.addEventListener("mouseleave", () => {
+            stopLoop();
+            if (resumeHandle) {
+              clearTimeout(resumeHandle);
+            }
+            setFrame(0);
+          });
 
           img.addEventListener("touchmove", event => {
             event.preventDefault();
@@ -185,6 +224,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
               const x = touch.clientX - bounds.left;
               const ratio = bounds.width ? Math.max(0, Math.min(1, x / bounds.width)) : 0;
               setFrame(Math.floor(ratio * (frameCount - 1)));
+              stopLoop();
+              scheduleResume();
             }
           }, { passive: false });
         }
@@ -207,7 +248,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--viewer", "-v", type=Path, default=Path("viewer"), help="Output directory for viewer artifacts.")
     parser.add_argument("--max-frames", type=int, default=0, help="How many frames per series to reference in the manifest (0=all).")
     parser.add_argument("--thumb-width", type=int, default=640, help="Maximum width for generated JPEG thumbnails.")
-    parser.add_argument("--thumb-quality", type=int, default=62, help="JPEG quality (1-95) for thumbnails.")
+    parser.add_argument("--thumb-quality", type=int, default=75, help="JPEG quality (1-95) for thumbnails.")
     return parser.parse_args()
 
 
