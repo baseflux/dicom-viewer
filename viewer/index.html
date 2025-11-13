@@ -146,12 +146,12 @@
   <div class="group-filters">
     <button class="group-filter active" data-group="all">All Series</button>
     <button class="group-filter" data-group="surgery01">Surgery 01</button>
-    <button class="group-filter" data-group="surgery02">Surgery 02</button>
+    <button class="group-filter" data-group="surgery02">Surgery 02 & Limbs</button>
     <button class="group-filter" data-group="xray">X-ray</button>
     <button class="group-filter" data-group="ct">CT</button>
     <button class="group-filter" data-group="brain">Brain</button>
     <button class="group-filter" data-group="chest">Chest</button>
-    <button class="group-filter" data-group="limbs">Limbs</button>
+    <button class="group-filter" data-group="testis">Testis</button>
   </div>
   <div class="note">Purple cards loop while hovered; orange cards are stills. Use the filters to focus.</div>
   <div id="series">Loading…</div>
@@ -201,7 +201,13 @@
         case "surgery01":
           return surgery.startsWith("01") || surgery.includes("surg_shoulder");
         case "surgery02":
-          return surgery.startsWith("02") || surgery.includes("surg_ankle");
+          return (
+            surgery.startsWith("02")
+            || surgery.includes("surg_ankle")
+            || surgery.includes("lowerlimb")
+            || seriesName.includes("leg")
+            || seriesName.includes("hip")
+          );
         case "xray":
           return modality.includes("xray");
         case "ct":
@@ -210,8 +216,8 @@
           return surgery.includes("brain") || seriesName.includes("brain");
         case "chest":
           return surgery.includes("chest");
-        case "limbs":
-          return surgery.includes("lowerlimb") || surgery.includes("extremity") || seriesName.includes("leg") || seriesName.includes("hip");
+        case "testis":
+          return seriesName.includes("testis") || surgery.includes("testis") || surgery.includes("scrotum");
         default:
           return true;
       }
