@@ -1,6 +1,6 @@
 {
   "root": "/Users/meow/Projects/dicom/dicom_01",
-  "generated": "2025-11-13T02:21:18.709748Z",
+  "generated": "2025-11-13T03:01:18.728657Z",
   "series": [
     {
       "surgery": "01_surg_shoulder",
@@ -283,7 +283,7 @@
       "modality": "XRAY",
       "series": "20250622_S001_Series",
       "frame_count": 2,
-      "type": "animation",
+      "type": "still",
       "frames": [
         "thumbnails/01_surg_shoulder/XRAY/20250622_S001_Series/frame_0001.jpg",
         "thumbnails/01_surg_shoulder/XRAY/20250622_S001_Series/frame_0002.jpg"

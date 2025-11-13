@@ -422,12 +422,13 @@ def build_manifest(root: Path, viewer_dir: Path, max_frames: Optional[int], thum
                     preview_index = 0
                 info = read_series_info(series)
                 info_text = ", ".join(f"{k}: {v}" for k, v in info.items() if v)
+                is_animation = len(frames) > 2
                 record = {
                     "surgery": surgery.name,
                     "modality": modality.name,
                     "series": series.name,
                     "frame_count": len(frames),
-                    "type": "animation" if len(frames) > 1 else "still",
+                    "type": "animation" if is_animation else "still",
                     "frames": rel_frames,
                     "info_text": info_text,
                     "preview": rel_frames[preview_index] if rel_frames else "",
