@@ -354,7 +354,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         }
         container.appendChild(card);
       });
-      applyFilter(activeFilter);
+      applyFilters();
     }
   </script>
 </body>
