@@ -133,8 +133,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         const card = document.createElement("article");
         const heading = document.createElement("h2");
         heading.textContent = `${entry.surgery} · ${entry.modality}`;
+        const previewIndex = Math.min(entry.frames.length - 1, entry.preview_index ?? 0);
         const img = document.createElement("img");
-        img.src = entry.preview || entry.frames[0] || "";
+        img.src = entry.frames[previewIndex] || entry.preview || "";
         img.alt = entry.series;
         img.loading = "lazy";
         card.append(heading, img);
@@ -161,7 +162,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
           card.classList.add("animation");
           const frames = entry.frames;
           const frameCount = frames.length;
-          let idx = 0;
+          let idx = previewIndex;
           let loopHandle = null;
           let resumeHandle = null;
           const setFrame = index => {
@@ -213,7 +214,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             if (resumeHandle) {
               clearTimeout(resumeHandle);
             }
-            setFrame(0);
+            setFrame(previewIndex);
           });
 
           img.addEventListener("touchmove", event => {
@@ -289,6 +290,13 @@ def build_manifest(root: Path, viewer_dir: Path, max_frames: Optional[int], thum
                 ]
                 info = read_series_info(series)
                 info_text = ", ".join(f"{k}: {v}" for k, v in info.items() if v)
+                preview_index = 0
+                if len(frames) > 2:
+                    preview_index = len(frames) // 2
+                elif len(frames) == 2:
+                    preview_index = 0
+                info = read_series_info(series)
+                info_text = ", ".join(f"{k}: {v}" for k, v in info.items() if v)
                 record = {
                     "surgery": surgery.name,
                     "modality": modality.name,
@@ -297,11 +305,8 @@ def build_manifest(root: Path, viewer_dir: Path, max_frames: Optional[int], thum
                     "type": "animation" if len(frames) > 1 else "still",
                     "frames": rel_frames,
                     "info_text": info_text,
-                    "preview": (
-                        rel_frames[0]
-                        if len(rel_frames) <= 2
-                        else rel_frames[len(rel_frames) // 2]
-                    ),
+                    "preview": rel_frames[preview_index] if rel_frames else "",
+                    "preview_index": preview_index,
                 }
                 series_data.append(record)
     return {
