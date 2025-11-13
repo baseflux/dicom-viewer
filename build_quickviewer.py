@@ -134,7 +134,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         const heading = document.createElement("h2");
         heading.textContent = `${entry.surgery} · ${entry.modality}`;
         const img = document.createElement("img");
-        img.src = entry.frames[0] || "";
+        img.src = entry.preview || entry.frames[0] || "";
         img.alt = entry.series;
         img.loading = "lazy";
         card.append(heading, img);
@@ -297,6 +297,11 @@ def build_manifest(root: Path, viewer_dir: Path, max_frames: Optional[int], thum
                     "type": "animation" if len(frames) > 1 else "still",
                     "frames": rel_frames,
                     "info_text": info_text,
+                    "preview": (
+                        rel_frames[0]
+                        if len(rel_frames) <= 2
+                        else rel_frames[len(rel_frames) // 2]
+                    ),
                 }
                 series_data.append(record)
     return {

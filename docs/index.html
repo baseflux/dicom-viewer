@@ -116,7 +116,7 @@
         const heading = document.createElement("h2");
         heading.textContent = `${entry.surgery} · ${entry.modality}`;
         const img = document.createElement("img");
-        img.src = entry.frames[0] || "";
+        img.src = entry.preview || entry.frames[0] || "";
         img.alt = entry.series;
         img.loading = "lazy";
         card.append(heading, img);

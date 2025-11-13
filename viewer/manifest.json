@@ -1,6 +1,6 @@
 {
   "root": "/Users/meow/Projects/dicom/dicom_01",
-  "generated": "2025-11-13T01:18:30.374723Z",
+  "generated": "2025-11-13T01:35:39.467326Z",
   "series": [
     {
       "surgery": "01_surg_shoulder",
@@ -40,7 +40,8 @@
         "thumbnails/01_surg_shoulder/MRI/20250623_S006_AX_PDFS/frame_0029.jpg",
         "thumbnails/01_surg_shoulder/MRI/20250623_S006_AX_PDFS/frame_0030.jpg"
       ],
-      "info_text": "StudyDate: 20250623, StudyTime: 104153.400000, SeriesNumber: 6, SeriesDescription: AX PDFS, Modality: MR, BodyPartExamined: SHOULDER"
+      "info_text": "StudyDate: 20250623, StudyTime: 104153.400000, SeriesNumber: 6, SeriesDescription: AX PDFS, Modality: MR, BodyPartExamined: SHOULDER",
+      "preview": "thumbnails/01_surg_shoulder/MRI/20250623_S006_AX_PDFS/frame_0016.jpg"
     },
     {
       "surgery": "01_surg_shoulder",
@@ -80,7 +81,8 @@
         "thumbnails/01_surg_shoulder/MRI/20250623_S007_AX_T1/frame_0029.jpg",
         "thumbnails/01_surg_shoulder/MRI/20250623_S007_AX_T1/frame_0030.jpg"
       ],
-      "info_text": "StudyDate: 20250623, StudyTime: 104153.400000, SeriesNumber: 7, SeriesDescription: AX T1, Modality: MR, BodyPartExamined: SHOULDER"
+      "info_text": "StudyDate: 20250623, StudyTime: 104153.400000, SeriesNumber: 7, SeriesDescription: AX T1, Modality: MR, BodyPartExamined: SHOULDER",
+      "preview": "thumbnails/01_surg_shoulder/MRI/20250623_S007_AX_T1/frame_0016.jpg"
     },
     {
       "surgery": "01_surg_shoulder",
@@ -116,7 +118,8 @@
         "thumbnails/01_surg_shoulder/MRI/20250623_S008_COR_T2FS/frame_0025.jpg",
         "thumbnails/01_surg_shoulder/MRI/20250623_S008_COR_T2FS/frame_0026.jpg"
       ],
-      "info_text": "StudyDate: 20250623, StudyTime: 104153.400000, SeriesNumber: 8, SeriesDescription: COR T2FS, Modality: MR, BodyPartExamined: SHOULDER"
+      "info_text": "StudyDate: 20250623, StudyTime: 104153.400000, SeriesNumber: 8, SeriesDescription: COR T2FS, Modality: MR, BodyPartExamined: SHOULDER",
+      "preview": "thumbnails/01_surg_shoulder/MRI/20250623_S008_COR_T2FS/frame_0014.jpg"
     },
     {
       "surgery": "01_surg_shoulder",
@@ -152,7 +155,8 @@
         "thumbnails/01_surg_shoulder/MRI/20250623_S009_COR_T1/frame_0025.jpg",
         "thumbnails/01_surg_shoulder/MRI/20250623_S009_COR_T1/frame_0026.jpg"
       ],
-      "info_text": "StudyDate: 20250623, StudyTime: 104153.400000, SeriesNumber: 9, SeriesDescription: COR T1, Modality: MR, BodyPartExamined: SHOULDER"
+      "info_text": "StudyDate: 20250623, StudyTime: 104153.400000, SeriesNumber: 9, SeriesDescription: COR T1, Modality: MR, BodyPartExamined: SHOULDER",
+      "preview": "thumbnails/01_surg_shoulder/MRI/20250623_S009_COR_T1/frame_0014.jpg"
     },
     {
       "surgery": "01_surg_shoulder",
@@ -188,7 +192,8 @@
         "thumbnails/01_surg_shoulder/MRI/20250623_S010_COR_PD_FS/frame_0025.jpg",
         "thumbnails/01_surg_shoulder/MRI/20250623_S010_COR_PD_FS/frame_0026.jpg"
       ],
-      "info_text": "StudyDate: 20250623, StudyTime: 104153.400000, SeriesNumber: 10, SeriesDescription: COR PD FS, Modality: MR, BodyPartExamined: SHOULDER"
+      "info_text": "StudyDate: 20250623, StudyTime: 104153.400000, SeriesNumber: 10, SeriesDescription: COR PD FS, Modality: MR, BodyPartExamined: SHOULDER",
+      "preview": "thumbnails/01_surg_shoulder/MRI/20250623_S010_COR_PD_FS/frame_0014.jpg"
     },
     {
       "surgery": "01_surg_shoulder",
@@ -225,7 +230,8 @@
         "thumbnails/01_surg_shoulder/MRI/20250623_S011_SAG_T2/frame_0026.jpg",
         "thumbnails/01_surg_shoulder/MRI/20250623_S011_SAG_T2/frame_0027.jpg"
       ],
-      "info_text": "StudyDate: 20250623, StudyTime: 104153.400000, SeriesNumber: 11, SeriesDescription: SAG T2, Modality: MR, BodyPartExamined: SHOULDER"
+      "info_text": "StudyDate: 20250623, StudyTime: 104153.400000, SeriesNumber: 11, SeriesDescription: SAG T2, Modality: MR, BodyPartExamined: SHOULDER",
+      "preview": "thumbnails/01_surg_shoulder/MRI/20250623_S011_SAG_T2/frame_0014.jpg"
     },
     {
       "surgery": "01_surg_shoulder",
@@ -262,7 +268,8 @@
         "thumbnails/01_surg_shoulder/MRI/20250623_S012_SAG_T2_FS/frame_0026.jpg",
         "thumbnails/01_surg_shoulder/MRI/20250623_S012_SAG_T2_FS/frame_0027.jpg"
       ],
-      "info_text": "StudyDate: 20250623, StudyTime: 104153.400000, SeriesNumber: 12, SeriesDescription: SAG T2 FS, Modality: MR, BodyPartExamined: SHOULDER"
+      "info_text": "StudyDate: 20250623, StudyTime: 104153.400000, SeriesNumber: 12, SeriesDescription: SAG T2 FS, Modality: MR, BodyPartExamined: SHOULDER",
+      "preview": "thumbnails/01_surg_shoulder/MRI/20250623_S012_SAG_T2_FS/frame_0014.jpg"
     },
     {
       "surgery": "01_surg_shoulder",
@@ -274,7 +281,8 @@
         "thumbnails/01_surg_shoulder/XRAY/20250622_S001_Series/frame_0001.jpg",
         "thumbnails/01_surg_shoulder/XRAY/20250622_S001_Series/frame_0002.jpg"
       ],
-      "info_text": "StudyDate: 20250622, StudyTime: 130714.190, SeriesNumber: 1, Modality: CR, BodyPartExamined: SHOULDER"
+      "info_text": "StudyDate: 20250622, StudyTime: 130714.190, SeriesNumber: 1, Modality: CR, BodyPartExamined: SHOULDER",
+      "preview": "thumbnails/01_surg_shoulder/XRAY/20250622_S001_Series/frame_0001.jpg"
     },
     {
       "surgery": "01_surg_shoulder",
@@ -285,7 +293,8 @@
       "frames": [
         "thumbnails/01_surg_shoulder/XRAY/20250622_S002_Series/frame_0001.jpg"
       ],
-      "info_text": "StudyDate: 20250622, StudyTime: 130714.190, SeriesNumber: 2, Modality: CR, BodyPartExamined: SHOULDER"
+      "info_text": "StudyDate: 20250622, StudyTime: 130714.190, SeriesNumber: 2, Modality: CR, BodyPartExamined: SHOULDER",
+      "preview": "thumbnails/01_surg_shoulder/XRAY/20250622_S002_Series/frame_0001.jpg"
     },
     {
       "surgery": "02_surg_ankle",
@@ -424,7 +433,8 @@
         "thumbnails/02_surg_ankle/CT/20251031_S80296_BONE_AX/frame_0128.jpg",
         "thumbnails/02_surg_ankle/CT/20251031_S80296_BONE_AX/frame_0129.jpg"
       ],
-      "info_text": "StudyDate: 20251031, StudyTime: 150918, SeriesNumber: 80296, SeriesDescription: BONE AX, Modality: CT"
+      "info_text": "StudyDate: 20251031, StudyTime: 150918, SeriesNumber: 80296, SeriesDescription: BONE AX, Modality: CT",
+      "preview": "thumbnails/02_surg_ankle/CT/20251031_S80296_BONE_AX/frame_0065.jpg"
     },
     {
       "surgery": "02_surg_ankle",
@@ -520,7 +530,8 @@
         "thumbnails/02_surg_ankle/CT/20251031_S80297_BONE_COR/frame_0085.jpg",
         "thumbnails/02_surg_ankle/CT/20251031_S80297_BONE_COR/frame_0086.jpg"
       ],
-      "info_text": "StudyDate: 20251031, StudyTime: 150918, SeriesNumber: 80297, SeriesDescription: BONE COR, Modality: CT"
+      "info_text": "StudyDate: 20251031, StudyTime: 150918, SeriesNumber: 80297, SeriesDescription: BONE COR, Modality: CT",
+      "preview": "thumbnails/02_surg_ankle/CT/20251031_S80297_BONE_COR/frame_0044.jpg"
     },
     {
       "surgery": "02_surg_ankle",
@@ -596,7 +607,8 @@
         "thumbnails/02_surg_ankle/CT/20251031_S80298_BONE_SAG/frame_0065.jpg",
         "thumbnails/02_surg_ankle/CT/20251031_S80298_BONE_SAG/frame_0066.jpg"
       ],
-      "info_text": "StudyDate: 20251031, StudyTime: 150918, SeriesNumber: 80298, SeriesDescription: BONE SAG, Modality: CT"
+      "info_text": "StudyDate: 20251031, StudyTime: 150918, SeriesNumber: 80298, SeriesDescription: BONE SAG, Modality: CT",
+      "preview": "thumbnails/02_surg_ankle/CT/20251031_S80298_BONE_SAG/frame_0034.jpg"
     },
     {
       "surgery": "02_surg_ankle",
@@ -665,7 +677,8 @@
         "thumbnails/02_surg_ankle/CT/20251031_S8030_ST_COR/frame_0058.jpg",
         "thumbnails/02_surg_ankle/CT/20251031_S8030_ST_COR/frame_0059.jpg"
       ],
-      "info_text": "StudyDate: 20251031, StudyTime: 150918, SeriesNumber: 8030, SeriesDescription: ST COR, Modality: CT"
+      "info_text": "StudyDate: 20251031, StudyTime: 150918, SeriesNumber: 8030, SeriesDescription: ST COR, Modality: CT",
+      "preview": "thumbnails/02_surg_ankle/CT/20251031_S8030_ST_COR/frame_0030.jpg"
     },
     {
       "surgery": "02_surg_ankle",
@@ -720,7 +733,8 @@
         "thumbnails/02_surg_ankle/CT/20251031_S8031_ST_SAG/frame_0044.jpg",
         "thumbnails/02_surg_ankle/CT/20251031_S8031_ST_SAG/frame_0045.jpg"
       ],
-      "info_text": "StudyDate: 20251031, StudyTime: 150918, SeriesNumber: 8031, SeriesDescription: ST SAG, Modality: CT"
+      "info_text": "StudyDate: 20251031, StudyTime: 150918, SeriesNumber: 8031, SeriesDescription: ST SAG, Modality: CT",
+      "preview": "thumbnails/02_surg_ankle/CT/20251031_S8031_ST_SAG/frame_0023.jpg"
     },
     {
       "surgery": "02_surg_ankle",
@@ -816,7 +830,8 @@
         "thumbnails/02_surg_ankle/CT/20251031_S80399_ST_AX/frame_0085.jpg",
         "thumbnails/02_surg_ankle/CT/20251031_S80399_ST_AX/frame_0086.jpg"
       ],
-      "info_text": "StudyDate: 20251031, StudyTime: 150918, SeriesNumber: 80399, SeriesDescription: ST AX, Modality: CT"
+      "info_text": "StudyDate: 20251031, StudyTime: 150918, SeriesNumber: 80399, SeriesDescription: ST AX, Modality: CT",
+      "preview": "thumbnails/02_surg_ankle/CT/20251031_S80399_ST_AX/frame_0044.jpg"
     },
     {
       "surgery": "02_surg_ankle",
@@ -827,7 +842,8 @@
       "frames": [
         "thumbnails/02_surg_ankle/XRAY/20241113_S001_Series/frame_0001.jpg"
       ],
-      "info_text": "StudyDate: 20241113, StudyTime: 015256.160, SeriesNumber: 1, Modality: CR, BodyPartExamined: FOOT"
+      "info_text": "StudyDate: 20241113, StudyTime: 015256.160, SeriesNumber: 1, Modality: CR, BodyPartExamined: FOOT",
+      "preview": "thumbnails/02_surg_ankle/XRAY/20241113_S001_Series/frame_0001.jpg"
     },
     {
       "surgery": "02_surg_ankle",
@@ -838,7 +854,8 @@
       "frames": [
         "thumbnails/02_surg_ankle/XRAY/20241113_S002_Series/frame_0001.jpg"
       ],
-      "info_text": "StudyDate: 20241113, StudyTime: 015256.160, SeriesNumber: 2, Modality: CR, BodyPartExamined: FOOT"
+      "info_text": "StudyDate: 20241113, StudyTime: 015256.160, SeriesNumber: 2, Modality: CR, BodyPartExamined: FOOT",
+      "preview": "thumbnails/02_surg_ankle/XRAY/20241113_S002_Series/frame_0001.jpg"
     },
     {
       "surgery": "02_surg_ankle",
@@ -849,7 +866,8 @@
       "frames": [
         "thumbnails/02_surg_ankle/XRAY/20251031_S001_ANKLE_LAT/frame_0001.jpg"
       ],
-      "info_text": "StudyDate: 20251031, StudyTime: 141750, SeriesNumber: 1, SeriesDescription: ANKLE LAT, Modality: CR, BodyPartExamined: ANKLE"
+      "info_text": "StudyDate: 20251031, StudyTime: 141750, SeriesNumber: 1, SeriesDescription: ANKLE LAT, Modality: CR, BodyPartExamined: ANKLE",
+      "preview": "thumbnails/02_surg_ankle/XRAY/20251031_S001_ANKLE_LAT/frame_0001.jpg"
     },
     {
       "surgery": "02_surg_ankle",
@@ -860,7 +878,8 @@
       "frames": [
         "thumbnails/02_surg_ankle/XRAY/20251031_S002_ANKLE_MORTISE/frame_0001.jpg"
       ],
-      "info_text": "StudyDate: 20251031, StudyTime: 141750, SeriesNumber: 2, SeriesDescription: ANKLE MORTISE, Modality: CR, BodyPartExamined: ANKLE"
+      "info_text": "StudyDate: 20251031, StudyTime: 141750, SeriesNumber: 2, SeriesDescription: ANKLE MORTISE, Modality: CR, BodyPartExamined: ANKLE",
+      "preview": "thumbnails/02_surg_ankle/XRAY/20251031_S002_ANKLE_MORTISE/frame_0001.jpg"
     },
     {
       "surgery": "02_surg_ankle",
@@ -871,7 +890,8 @@
       "frames": [
         "thumbnails/02_surg_ankle/XRAY/20251031_S007_ANKLE_AP/frame_0001.jpg"
       ],
-      "info_text": "StudyDate: 20251031, StudyTime: 141750, SeriesNumber: 7, SeriesDescription: ANKLE AP, Modality: CR, BodyPartExamined: ANKLE"
+      "info_text": "StudyDate: 20251031, StudyTime: 141750, SeriesNumber: 7, SeriesDescription: ANKLE AP, Modality: CR, BodyPartExamined: ANKLE",
+      "preview": "thumbnails/02_surg_ankle/XRAY/20251031_S007_ANKLE_AP/frame_0001.jpg"
     },
     {
       "surgery": "03_neuro_brain",
@@ -901,7 +921,8 @@
         "thumbnails/03_neuro_brain/CT/20250101_S601_3D_C-SPINE/frame_0019.jpg",
         "thumbnails/03_neuro_brain/CT/20250101_S601_3D_C-SPINE/frame_0020.jpg"
       ],
-      "info_text": "StudyDate: 20250101, StudyTime: 195315, SeriesNumber: 601, SeriesDescription: 3D C-SPINE, Modality: CT"
+      "info_text": "StudyDate: 20250101, StudyTime: 195315, SeriesNumber: 601, SeriesDescription: 3D C-SPINE, Modality: CT",
+      "preview": "thumbnails/03_neuro_brain/CT/20250101_S601_3D_C-SPINE/frame_0011.jpg"
     },
     {
       "surgery": "03_neuro_brain",
@@ -978,7 +999,8 @@
         "thumbnails/03_neuro_brain/CT/20250101_S80312_BRAIN_AX/frame_0066.jpg",
         "thumbnails/03_neuro_brain/CT/20250101_S80312_BRAIN_AX/frame_0067.jpg"
       ],
-      "info_text": "StudyDate: 20250101, StudyTime: 195315, SeriesNumber: 80312, SeriesDescription: BRAIN AX, Modality: CT"
+      "info_text": "StudyDate: 20250101, StudyTime: 195315, SeriesNumber: 80312, SeriesDescription: BRAIN AX, Modality: CT",
+      "preview": "thumbnails/03_neuro_brain/CT/20250101_S80312_BRAIN_AX/frame_0034.jpg"
     },
     {
       "surgery": "03_neuro_brain",
@@ -1074,7 +1096,8 @@
         "thumbnails/03_neuro_brain/CT/20250101_S80313_BRAIN_COR/frame_0085.jpg",
         "thumbnails/03_neuro_brain/CT/20250101_S80313_BRAIN_COR/frame_0086.jpg"
       ],
-      "info_text": "StudyDate: 20250101, StudyTime: 195315, SeriesNumber: 80313, SeriesDescription: BRAIN COR, Modality: CT"
+      "info_text": "StudyDate: 20250101, StudyTime: 195315, SeriesNumber: 80313, SeriesDescription: BRAIN COR, Modality: CT",
+      "preview": "thumbnails/03_neuro_brain/CT/20250101_S80313_BRAIN_COR/frame_0044.jpg"
     },
     {
       "surgery": "03_neuro_brain",
@@ -1169,7 +1192,8 @@
         "thumbnails/03_neuro_brain/CT/20250101_S80314_BRAIN_SAG/frame_0084.jpg",
         "thumbnails/03_neuro_brain/CT/20250101_S80314_BRAIN_SAG/frame_0085.jpg"
       ],
-      "info_text": "StudyDate: 20250101, StudyTime: 195315, SeriesNumber: 80314, SeriesDescription: BRAIN SAG, Modality: CT"
+      "info_text": "StudyDate: 20250101, StudyTime: 195315, SeriesNumber: 80314, SeriesDescription: BRAIN SAG, Modality: CT",
+      "preview": "thumbnails/03_neuro_brain/CT/20250101_S80314_BRAIN_SAG/frame_0043.jpg"
     },
     {
       "surgery": "03_neuro_brain",
@@ -1279,7 +1303,8 @@
         "thumbnails/03_neuro_brain/CT/20250101_S80415_BRAIN_BONE_AX/frame_0099.jpg",
         "thumbnails/03_neuro_brain/CT/20250101_S80415_BRAIN_BONE_AX/frame_0100.jpg"
       ],
-      "info_text": "StudyDate: 20250101, StudyTime: 195315, SeriesNumber: 80415, SeriesDescription: BRAIN BONE AX, Modality: CT"
+      "info_text": "StudyDate: 20250101, StudyTime: 195315, SeriesNumber: 80415, SeriesDescription: BRAIN BONE AX, Modality: CT",
+      "preview": "thumbnails/03_neuro_brain/CT/20250101_S80415_BRAIN_BONE_AX/frame_0051.jpg"
     },
     {
       "surgery": "03_neuro_brain",
@@ -1418,7 +1443,8 @@
         "thumbnails/03_neuro_brain/CT/20250101_S80416_BRAIN_BONE_COR/frame_0128.jpg",
         "thumbnails/03_neuro_brain/CT/20250101_S80416_BRAIN_BONE_COR/frame_0129.jpg"
       ],
-      "info_text": "StudyDate: 20250101, StudyTime: 195315, SeriesNumber: 80416, SeriesDescription: BRAIN BONE COR, Modality: CT"
+      "info_text": "StudyDate: 20250101, StudyTime: 195315, SeriesNumber: 80416, SeriesDescription: BRAIN BONE COR, Modality: CT",
+      "preview": "thumbnails/03_neuro_brain/CT/20250101_S80416_BRAIN_BONE_COR/frame_0065.jpg"
     },
     {
       "surgery": "03_neuro_brain",
@@ -1551,7 +1577,8 @@
         "thumbnails/03_neuro_brain/CT/20250101_S80417_BRAIN_BONE_SAG/frame_0122.jpg",
         "thumbnails/03_neuro_brain/CT/20250101_S80417_BRAIN_BONE_SAG/frame_0123.jpg"
       ],
-      "info_text": "StudyDate: 20250101, StudyTime: 195315, SeriesNumber: 80417, SeriesDescription: BRAIN BONE SAG, Modality: CT"
+      "info_text": "StudyDate: 20250101, StudyTime: 195315, SeriesNumber: 80417, SeriesDescription: BRAIN BONE SAG, Modality: CT",
+      "preview": "thumbnails/03_neuro_brain/CT/20250101_S80417_BRAIN_BONE_SAG/frame_0062.jpg"
     },
     {
       "surgery": "03_neuro_brain",
@@ -1720,7 +1747,8 @@
         "thumbnails/03_neuro_brain/CT/20250101_S80518_C_SPINE_BONE_AX/frame_0158.jpg",
         "thumbnails/03_neuro_brain/CT/20250101_S80518_C_SPINE_BONE_AX/frame_0159.jpg"
       ],
-      "info_text": "StudyDate: 20250101, StudyTime: 195315, SeriesNumber: 80518, SeriesDescription: C SPINE BONE  AX, Modality: CT"
+      "info_text": "StudyDate: 20250101, StudyTime: 195315, SeriesNumber: 80518, SeriesDescription: C SPINE BONE  AX, Modality: CT",
+      "preview": "thumbnails/03_neuro_brain/CT/20250101_S80518_C_SPINE_BONE_AX/frame_0080.jpg"
     },
     {
       "surgery": "03_neuro_brain",
@@ -1837,7 +1865,8 @@
         "thumbnails/03_neuro_brain/CT/20250101_S80519_C_SPINE_BONE_COR/frame_0106.jpg",
         "thumbnails/03_neuro_brain/CT/20250101_S80519_C_SPINE_BONE_COR/frame_0107.jpg"
       ],
-      "info_text": "StudyDate: 20250101, StudyTime: 195315, SeriesNumber: 80519, SeriesDescription: C SPINE BONE  COR, Modality: CT"
+      "info_text": "StudyDate: 20250101, StudyTime: 195315, SeriesNumber: 80519, SeriesDescription: C SPINE BONE  COR, Modality: CT",
+      "preview": "thumbnails/03_neuro_brain/CT/20250101_S80519_C_SPINE_BONE_COR/frame_0054.jpg"
     },
     {
       "surgery": "03_neuro_brain",
@@ -1948,7 +1977,8 @@
         "thumbnails/03_neuro_brain/CT/20250101_S80520_C_SPINE_BONE_SAG/frame_0100.jpg",
         "thumbnails/03_neuro_brain/CT/20250101_S80520_C_SPINE_BONE_SAG/frame_0101.jpg"
       ],
-      "info_text": "StudyDate: 20250101, StudyTime: 195315, SeriesNumber: 80520, SeriesDescription: C SPINE BONE  SAG, Modality: CT"
+      "info_text": "StudyDate: 20250101, StudyTime: 195315, SeriesNumber: 80520, SeriesDescription: C SPINE BONE  SAG, Modality: CT",
+      "preview": "thumbnails/03_neuro_brain/CT/20250101_S80520_C_SPINE_BONE_SAG/frame_0051.jpg"
     },
     {
       "surgery": "03_neuro_brain",
@@ -2060,7 +2090,8 @@
         "thumbnails/03_neuro_brain/CT/20250101_S80621_C_SPINE_AX/frame_0101.jpg",
         "thumbnails/03_neuro_brain/CT/20250101_S80621_C_SPINE_AX/frame_0102.jpg"
       ],
-      "info_text": "StudyDate: 20250101, StudyTime: 195315, SeriesNumber: 80621, SeriesDescription: C SPINE AX, Modality: CT"
+      "info_text": "StudyDate: 20250101, StudyTime: 195315, SeriesNumber: 80621, SeriesDescription: C SPINE AX, Modality: CT",
+      "preview": "thumbnails/03_neuro_brain/CT/20250101_S80621_C_SPINE_AX/frame_0052.jpg"
     },
     {
       "surgery": "03_neuro_brain",
@@ -2142,7 +2173,8 @@
         "thumbnails/03_neuro_brain/CT/20250101_S80622_C_SPINE_COR/frame_0071.jpg",
         "thumbnails/03_neuro_brain/CT/20250101_S80622_C_SPINE_COR/frame_0072.jpg"
       ],
-      "info_text": "StudyDate: 20250101, StudyTime: 195315, SeriesNumber: 80622, SeriesDescription: C SPINE COR, Modality: CT"
+      "info_text": "StudyDate: 20250101, StudyTime: 195315, SeriesNumber: 80622, SeriesDescription: C SPINE COR, Modality: CT",
+      "preview": "thumbnails/03_neuro_brain/CT/20250101_S80622_C_SPINE_COR/frame_0037.jpg"
     },
     {
       "surgery": "03_neuro_brain",
@@ -2219,7 +2251,8 @@
         "thumbnails/03_neuro_brain/CT/20250101_S80623_C_SPINE_SAG/frame_0066.jpg",
         "thumbnails/03_neuro_brain/CT/20250101_S80623_C_SPINE_SAG/frame_0067.jpg"
       ],
-      "info_text": "StudyDate: 20250101, StudyTime: 195315, SeriesNumber: 80623, SeriesDescription: C SPINE SAG, Modality: CT"
+      "info_text": "StudyDate: 20250101, StudyTime: 195315, SeriesNumber: 80623, SeriesDescription: C SPINE SAG, Modality: CT",
+      "preview": "thumbnails/03_neuro_brain/CT/20250101_S80623_C_SPINE_SAG/frame_0034.jpg"
     },
     {
       "surgery": "04_chest",
@@ -2230,7 +2263,8 @@
       "frames": [
         "thumbnails/04_chest/XRAY/20241113_S001_Chest_PA_Upright__Bucky_/frame_0001.jpg"
       ],
-      "info_text": "StudyDate: 20241113, StudyTime: 015256.160, SeriesNumber: 1, SeriesDescription: Chest PA Upright (Bucky), Modality: CR, BodyPartExamined: CHEST"
+      "info_text": "StudyDate: 20241113, StudyTime: 015256.160, SeriesNumber: 1, SeriesDescription: Chest PA Upright (Bucky), Modality: CR, BodyPartExamined: CHEST",
+      "preview": "thumbnails/04_chest/XRAY/20241113_S001_Chest_PA_Upright__Bucky_/frame_0001.jpg"
     },
     {
       "surgery": "04_chest",
@@ -2241,7 +2275,8 @@
       "frames": [
         "thumbnails/04_chest/XRAY/20241113_S002_Chest_PA_Upright__Bucky_/frame_0001.jpg"
       ],
-      "info_text": "StudyDate: 20241113, StudyTime: 015256.160, SeriesNumber: 2, SeriesDescription: Chest PA Upright (Bucky), Modality: CR, BodyPartExamined: CHEST"
+      "info_text": "StudyDate: 20241113, StudyTime: 015256.160, SeriesNumber: 2, SeriesDescription: Chest PA Upright (Bucky), Modality: CR, BodyPartExamined: CHEST",
+      "preview": "thumbnails/04_chest/XRAY/20241113_S002_Chest_PA_Upright__Bucky_/frame_0001.jpg"
     },
     {
       "surgery": "04_chest",
@@ -2252,7 +2287,8 @@
       "frames": [
         "thumbnails/04_chest/XRAY/20250622_S001_Series/frame_0001.jpg"
       ],
-      "info_text": "StudyDate: 20250622, StudyTime: 130714.190, SeriesNumber: 1, Modality: CR, BodyPartExamined: CHEST"
+      "info_text": "StudyDate: 20250622, StudyTime: 130714.190, SeriesNumber: 1, Modality: CR, BodyPartExamined: CHEST",
+      "preview": "thumbnails/04_chest/XRAY/20250622_S001_Series/frame_0001.jpg"
     },
     {
       "surgery": "04_chest",
@@ -2263,7 +2299,8 @@
       "frames": [
         "thumbnails/04_chest/XRAY/20250622_S002_Series/frame_0001.jpg"
       ],
-      "info_text": "StudyDate: 20250622, StudyTime: 130714.190, SeriesNumber: 2, Modality: CR, BodyPartExamined: CHEST"
+      "info_text": "StudyDate: 20250622, StudyTime: 130714.190, SeriesNumber: 2, Modality: CR, BodyPartExamined: CHEST",
+      "preview": "thumbnails/04_chest/XRAY/20250622_S002_Series/frame_0001.jpg"
     },
     {
       "surgery": "04_chest",
@@ -2274,7 +2311,8 @@
       "frames": [
         "thumbnails/04_chest/XRAY/20250622_S003_Series/frame_0001.jpg"
       ],
-      "info_text": "StudyDate: 20250622, StudyTime: 130714.190, SeriesNumber: 3, Modality: CR, BodyPartExamined: CHEST"
+      "info_text": "StudyDate: 20250622, StudyTime: 130714.190, SeriesNumber: 3, Modality: CR, BodyPartExamined: CHEST",
+      "preview": "thumbnails/04_chest/XRAY/20250622_S003_Series/frame_0001.jpg"
     },
     {
       "surgery": "04_chest",
@@ -2285,7 +2323,8 @@
       "frames": [
         "thumbnails/04_chest/XRAY/20250622_S004_Series/frame_0001.jpg"
       ],
-      "info_text": "StudyDate: 20250622, StudyTime: 130714.190, SeriesNumber: 4, Modality: CR, BodyPartExamined: CHEST"
+      "info_text": "StudyDate: 20250622, StudyTime: 130714.190, SeriesNumber: 4, Modality: CR, BodyPartExamined: CHEST",
+      "preview": "thumbnails/04_chest/XRAY/20250622_S004_Series/frame_0001.jpg"
     },
     {
       "surgery": "04_chest",
@@ -2296,7 +2335,8 @@
       "frames": [
         "thumbnails/04_chest/XRAY/20250623_S001_Series/frame_0001.jpg"
       ],
-      "info_text": "StudyDate: 20250623, StudyTime: 132739.800, SeriesNumber: 1, Modality: DX, BodyPartExamined: CHEST"
+      "info_text": "StudyDate: 20250623, StudyTime: 132739.800, SeriesNumber: 1, Modality: DX, BodyPartExamined: CHEST",
+      "preview": "thumbnails/04_chest/XRAY/20250623_S001_Series/frame_0001.jpg"
     },
     {
       "surgery": "04_chest",
@@ -2307,7 +2347,8 @@
       "frames": [
         "thumbnails/04_chest/XRAY/20250623_S002_Series/frame_0001.jpg"
       ],
-      "info_text": "StudyDate: 20250623, StudyTime: 132739.800, SeriesNumber: 2, Modality: DX, BodyPartExamined: CHEST"
+      "info_text": "StudyDate: 20250623, StudyTime: 132739.800, SeriesNumber: 2, Modality: DX, BodyPartExamined: CHEST",
+      "preview": "thumbnails/04_chest/XRAY/20250623_S002_Series/frame_0001.jpg"
     },
     {
       "surgery": "04_chest",
@@ -2318,7 +2359,8 @@
       "frames": [
         "thumbnails/04_chest/XRAY/20250624_S1001_Series/frame_0001.jpg"
       ],
-      "info_text": "StudyDate: 20250624, StudyTime: 221209.604, SeriesNumber: 1001, Modality: DX, BodyPartExamined: CHEST"
+      "info_text": "StudyDate: 20250624, StudyTime: 221209.604, SeriesNumber: 1001, Modality: DX, BodyPartExamined: CHEST",
+      "preview": "thumbnails/04_chest/XRAY/20250624_S1001_Series/frame_0001.jpg"
     },
     {
       "surgery": "04_chest",
@@ -2329,7 +2371,8 @@
       "frames": [
         "thumbnails/04_chest/XRAY/20250624_S1002_Series/frame_0001.jpg"
       ],
-      "info_text": "StudyDate: 20250624, StudyTime: 221209.604, SeriesNumber: 1002, Modality: DX, BodyPartExamined: CHEST"
+      "info_text": "StudyDate: 20250624, StudyTime: 221209.604, SeriesNumber: 1002, Modality: DX, BodyPartExamined: CHEST",
+      "preview": "thumbnails/04_chest/XRAY/20250624_S1002_Series/frame_0001.jpg"
     },
     {
       "surgery": "04_chest",
@@ -2340,7 +2383,8 @@
       "frames": [
         "thumbnails/04_chest/XRAY/20250626_S1001_Series/frame_0001.jpg"
       ],
-      "info_text": "StudyDate: 20250626, StudyTime: 081328.928, SeriesNumber: 1001, Modality: DX, BodyPartExamined: CHEST"
+      "info_text": "StudyDate: 20250626, StudyTime: 081328.928, SeriesNumber: 1001, Modality: DX, BodyPartExamined: CHEST",
+      "preview": "thumbnails/04_chest/XRAY/20250626_S1001_Series/frame_0001.jpg"
     },
     {
       "surgery": "04_chest",
@@ -2351,7 +2395,8 @@
       "frames": [
         "thumbnails/04_chest/XRAY/20250626_S1002_Series/frame_0001.jpg"
       ],
-      "info_text": "StudyDate: 20250626, StudyTime: 081328.928, SeriesNumber: 1002, Modality: DX, BodyPartExamined: CHEST"
+      "info_text": "StudyDate: 20250626, StudyTime: 081328.928, SeriesNumber: 1002, Modality: DX, BodyPartExamined: CHEST",
+      "preview": "thumbnails/04_chest/XRAY/20250626_S1002_Series/frame_0001.jpg"
     },
     {
       "surgery": "04_chest",
@@ -2362,7 +2407,8 @@
       "frames": [
         "thumbnails/04_chest/XRAY/20250629_S001_Series/frame_0001.jpg"
       ],
-      "info_text": "StudyDate: 20250629, StudyTime: 113050.730, SeriesNumber: 1, Modality: CR, BodyPartExamined: CHEST"
+      "info_text": "StudyDate: 20250629, StudyTime: 113050.730, SeriesNumber: 1, Modality: CR, BodyPartExamined: CHEST",
+      "preview": "thumbnails/04_chest/XRAY/20250629_S001_Series/frame_0001.jpg"
     },
     {
       "surgery": "04_chest",
@@ -2373,7 +2419,8 @@
       "frames": [
         "thumbnails/04_chest/XRAY/20251031_S001_Series/frame_0001.jpg"
       ],
-      "info_text": "StudyDate: 20251031, StudyTime: 174325.470, SeriesNumber: 1, Modality: CR, BodyPartExamined: CHEST"
+      "info_text": "StudyDate: 20251031, StudyTime: 174325.470, SeriesNumber: 1, Modality: CR, BodyPartExamined: CHEST",
+      "preview": "thumbnails/04_chest/XRAY/20251031_S001_Series/frame_0001.jpg"
     },
     {
       "surgery": "05_urology",
@@ -2423,7 +2470,8 @@
         "thumbnails/05_urology/US/20250315_S001_Ultrasound_Scrotum__Testis_/frame_0039.jpg",
         "thumbnails/05_urology/US/20250315_S001_Ultrasound_Scrotum__Testis_/frame_0040.jpg"
       ],
-      "info_text": "StudyDate: 20250315, StudyTime: 112530, SeriesNumber: 1, SeriesDescription: Ultrasound Scrotum (Testis), Modality: US"
+      "info_text": "StudyDate: 20250315, StudyTime: 112530, SeriesNumber: 1, SeriesDescription: Ultrasound Scrotum (Testis), Modality: US",
+      "preview": "thumbnails/05_urology/US/20250315_S001_Ultrasound_Scrotum__Testis_/frame_0021.jpg"
     },
     {
       "surgery": "06_lowerlimb",
@@ -2434,7 +2482,8 @@
       "frames": [
         "thumbnails/06_lowerlimb/XRAY/20251101_S075_Skeleton-Hip_Leg/frame_0001.jpg"
       ],
-      "info_text": "StudyDate: 20251101, StudyTime: 065136, SeriesNumber: 75, SeriesDescription: Skeleton-Hip/Leg, Modality: XA"
+      "info_text": "StudyDate: 20251101, StudyTime: 065136, SeriesNumber: 75, SeriesDescription: Skeleton-Hip/Leg, Modality: XA",
+      "preview": "thumbnails/06_lowerlimb/XRAY/20251101_S075_Skeleton-Hip_Leg/frame_0001.jpg"
     },
     {
       "surgery": "06_lowerlimb",
@@ -2445,7 +2494,8 @@
       "frames": [
         "thumbnails/06_lowerlimb/XRAY/20251101_S076_Skeleton-Hip_Leg/frame_0001.jpg"
       ],
-      "info_text": "StudyDate: 20251101, StudyTime: 065136, SeriesNumber: 76, SeriesDescription: Skeleton-Hip/Leg, Modality: XA"
+      "info_text": "StudyDate: 20251101, StudyTime: 065136, SeriesNumber: 76, SeriesDescription: Skeleton-Hip/Leg, Modality: XA",
+      "preview": "thumbnails/06_lowerlimb/XRAY/20251101_S076_Skeleton-Hip_Leg/frame_0001.jpg"
     },
     {
       "surgery": "06_lowerlimb",
@@ -2456,7 +2506,8 @@
       "frames": [
         "thumbnails/06_lowerlimb/XRAY/20251101_S077_Skeleton-Hip_Leg/frame_0001.jpg"
       ],
-      "info_text": "StudyDate: 20251101, StudyTime: 065136, SeriesNumber: 77, SeriesDescription: Skeleton-Hip/Leg, Modality: XA"
+      "info_text": "StudyDate: 20251101, StudyTime: 065136, SeriesNumber: 77, SeriesDescription: Skeleton-Hip/Leg, Modality: XA",
+      "preview": "thumbnails/06_lowerlimb/XRAY/20251101_S077_Skeleton-Hip_Leg/frame_0001.jpg"
     },
     {
       "surgery": "06_lowerlimb",
@@ -2467,7 +2518,8 @@
       "frames": [
         "thumbnails/06_lowerlimb/XRAY/20251101_S078_Skeleton-Hip_Leg/frame_0001.jpg"
       ],
-      "info_text": "StudyDate: 20251101, StudyTime: 065136, SeriesNumber: 78, SeriesDescription: Skeleton-Hip/Leg, Modality: XA"
+      "info_text": "StudyDate: 20251101, StudyTime: 065136, SeriesNumber: 78, SeriesDescription: Skeleton-Hip/Leg, Modality: XA",
+      "preview": "thumbnails/06_lowerlimb/XRAY/20251101_S078_Skeleton-Hip_Leg/frame_0001.jpg"
     },
     {
       "surgery": "06_lowerlimb",
@@ -2478,7 +2530,8 @@
       "frames": [
         "thumbnails/06_lowerlimb/XRAY/20251101_S080_Skeleton-Hip_Leg/frame_0001.jpg"
       ],
-      "info_text": "StudyDate: 20251101, StudyTime: 065136, SeriesNumber: 80, SeriesDescription: Skeleton-Hip/Leg, Modality: XA"
+      "info_text": "StudyDate: 20251101, StudyTime: 065136, SeriesNumber: 80, SeriesDescription: Skeleton-Hip/Leg, Modality: XA",
+      "preview": "thumbnails/06_lowerlimb/XRAY/20251101_S080_Skeleton-Hip_Leg/frame_0001.jpg"
     },
     {
       "surgery": "06_lowerlimb",
@@ -2489,7 +2542,8 @@
       "frames": [
         "thumbnails/06_lowerlimb/XRAY/20251101_S081_Skeleton-Hip_Leg/frame_0001.jpg"
       ],
-      "info_text": "StudyDate: 20251101, StudyTime: 065136, SeriesNumber: 81, SeriesDescription: Skeleton-Hip/Leg, Modality: XA"
+      "info_text": "StudyDate: 20251101, StudyTime: 065136, SeriesNumber: 81, SeriesDescription: Skeleton-Hip/Leg, Modality: XA",
+      "preview": "thumbnails/06_lowerlimb/XRAY/20251101_S081_Skeleton-Hip_Leg/frame_0001.jpg"
     },
     {
       "surgery": "20241113_RIBS_LT.OBLIQUE_RIB_OBLIQUE_AP__BUCKY__RIB",
@@ -2500,7 +2554,8 @@
       "frames": [
         "thumbnails/20241113_RIBS_LT.OBLIQUE_RIB_OBLIQUE_AP__BUCKY__RIB/XRAY/20241113_S001_Series/frame_0001.jpg"
       ],
-      "info_text": "StudyDate: 20241113, StudyTime: 015256.160, SeriesNumber: 1, Modality: CR, BodyPartExamined: RIB"
+      "info_text": "StudyDate: 20241113, StudyTime: 015256.160, SeriesNumber: 1, Modality: CR, BodyPartExamined: RIB",
+      "preview": "thumbnails/20241113_RIBS_LT.OBLIQUE_RIB_OBLIQUE_AP__BUCKY__RIB/XRAY/20241113_S001_Series/frame_0001.jpg"
     },
     {
       "surgery": "20241113_RIBS_LT.OBLIQUE_RIB_OBLIQUE_AP__BUCKY__RIB",
@@ -2511,7 +2566,8 @@
       "frames": [
         "thumbnails/20241113_RIBS_LT.OBLIQUE_RIB_OBLIQUE_AP__BUCKY__RIB/XRAY/20241113_S002_Series/frame_0001.jpg"
       ],
-      "info_text": "StudyDate: 20241113, StudyTime: 015256.160, SeriesNumber: 2, Modality: CR, BodyPartExamined: RIB"
+      "info_text": "StudyDate: 20241113, StudyTime: 015256.160, SeriesNumber: 2, Modality: CR, BodyPartExamined: RIB",
+      "preview": "thumbnails/20241113_RIBS_LT.OBLIQUE_RIB_OBLIQUE_AP__BUCKY__RIB/XRAY/20241113_S002_Series/frame_0001.jpg"
     },
     {
       "surgery": "20251031_CT_EXTREMITY_Y_3D",
@@ -2541,7 +2597,8 @@
         "thumbnails/20251031_CT_EXTREMITY_Y_3D/CT/20251031_S301_3D/frame_0019.jpg",
         "thumbnails/20251031_CT_EXTREMITY_Y_3D/CT/20251031_S301_3D/frame_0020.jpg"
       ],
-      "info_text": "StudyDate: 20251031, StudyTime: 150918, SeriesNumber: 301, SeriesDescription: 3D, Modality: CT"
+      "info_text": "StudyDate: 20251031, StudyTime: 150918, SeriesNumber: 301, SeriesDescription: 3D, Modality: CT",
+      "preview": "thumbnails/20251031_CT_EXTREMITY_Y_3D/CT/20251031_S301_3D/frame_0011.jpg"
     },
     {
       "surgery": "20251031_CT_EXTREMITY_Y_3D_2",
@@ -2571,7 +2628,8 @@
         "thumbnails/20251031_CT_EXTREMITY_Y_3D_2/CT/20251031_S302_3D_2/frame_0019.jpg",
         "thumbnails/20251031_CT_EXTREMITY_Y_3D_2/CT/20251031_S302_3D_2/frame_0020.jpg"
       ],
-      "info_text": "StudyDate: 20251031, StudyTime: 150918, SeriesNumber: 302, SeriesDescription: 3D 2, Modality: CT"
+      "info_text": "StudyDate: 20251031, StudyTime: 150918, SeriesNumber: 302, SeriesDescription: 3D 2, Modality: CT",
+      "preview": "thumbnails/20251031_CT_EXTREMITY_Y_3D_2/CT/20251031_S302_3D_2/frame_0011.jpg"
     }
   ]
 }
