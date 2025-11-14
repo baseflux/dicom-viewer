@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DICOM Series Player</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      font-family: "Inter", system-ui, sans-serif;
+      background: #0f1115;
+      color: #f8f8f8;
+    }
+    body {
+      margin: 0;
+      padding: 1rem;
+    }
+    h1 {
+      margin-bottom: 0.2rem;
+    }
+    .note {
+      margin-bottom: 1rem;
+      padding: 0.6rem 0.8rem;
+      background: #171a23;
+      border: 1px dashed #6a5af9;
+      border-radius: 0.6rem;
+      color: #dfe2ff;
+      font-size: 0.9rem;
+    }
+    .player {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .player img {
+      width: 100%;
+      max-width: 1200px;
+      border-radius: 1rem;
+      background: #05070a;
+      object-fit: contain;
+      border: 1px solid #252836;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.9rem;
+      color: #bfc7db;
+    }
+    .controls {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .controls button {
+      padding: 0.35rem 0.9rem;
+      border-radius: 0.45rem;
+      border: 1px solid #2f2f3a;
+      background: #1c1f2a;
+      color: #f8f8f8;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .controls button.active {
+      border-color: #6a5af9;
+      background: #2a2558;
+    }
+    .error {
+      padding: 1rem;
+      background: #241814;
+      color: #ffbebe;
+      border-radius: 0.6rem;
+      border: 1px solid #ff8b8b;
+    }
+  </style>
+</head>
+<body>
+  <h1>Series Player</h1>
+  <p class="note">Use the scrub/loop controls below the image. Hover or touch to start looping.</p>
+  <div id="status" class="error" style="display:none;"></div>
+  <div class="player" style="display:none;">
+    <img id="player-img" alt="DICOM preview" loading="lazy" />
+    <div class="meta">
+      <span id="player-title"></span>
+      <span id="player-count"></span>
+      <span id="player-info"></span>
+    </div>
+    <div class="controls">
+      <button id="prev">Prev</button>
+      <button id="play" class="active">Play</button>
+      <button id="pause">Pause</button>
+      <button id="next">Next</button>
+    </div>
+  </div>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const requested = params.get("series");
+    const status = document.getElementById("status");
+    if (!requested) {
+      status.textContent = "Series key missing.";
+      status.style.display = "block";
+    } else {
+      fetch("manifest.json")
+        .then(res => res.json())
+        .then(manifest => {
+          const entry = manifest.series.find(s => s.series_key === requested);
+          if (!entry) {
+            status.textContent = "Series not found.";
+            status.style.display = "block";
+            return;
+          }
+          setupPlayer(entry);
+        })
+        .catch(err => {
+          status.textContent = `Failed to load manifest: ${err.message}`;
+          status.style.display = "block";
+          console.error(err);
+        });
+    }
+
+    function setupPlayer(entry) {
+      const frames = entry.player_frames.length ? entry.player_frames : entry.frames;
+      if (!frames.length) {
+        status.textContent = "No frames available.";
+        status.style.display = "block";
+        return;
+      }
+      const player = document.querySelector(".player");
+      const img = document.getElementById("player-img");
+      const title = document.getElementById("player-title");
+      const count = document.getElementById("player-count");
+      const info = document.getElementById("player-info");
+      player.style.display = "flex";
+      title.textContent = `${entry.surgery} · ${entry.series}`;
+      count.textContent = `${frames.length} frame${frames.length === 1 ? "" : "s"}`;
+      info.textContent = entry.info_text;
+      let idx = Math.min(entry.preview_index ?? 0, frames.length - 1);
+      let loopHandle = null;
+      let resumeHandle = null;
+      const setFrame = i => {
+        idx = Math.max(0, Math.min(frames.length - 1, i));
+        img.src = frames[idx];
+      };
+      const loop = () => {
+        setFrame((idx + 1) % frames.length);
+      };
+      const startLoop = () => {
+        if (loopHandle) return;
+        loopHandle = setInterval(loop, 600);
+      };
+      const stopLoop = () => {
+        if (loopHandle) {
+          clearInterval(loopHandle);
+          loopHandle = null;
+        }
+      };
+      const scheduleResume = () => {
+        if (resumeHandle) {
+          clearTimeout(resumeHandle);
+        }
+        resumeHandle = setTimeout(() => {
+          startLoop();
+        }, 800);
+      };
+      const scrub = event => {
+        const bounds = img.getBoundingClientRect();
+        const x = event.clientX - bounds.left;
+        const ratio = bounds.width ? Math.max(0, Math.min(1, x / bounds.width)) : 0;
+        setFrame(Math.floor(ratio * (frames.length - 1)));
+      };
+      img.addEventListener("mousemove", event => {
+        scrub(event);
+        stopLoop();
+        scheduleResume();
+      });
+      img.addEventListener("mouseenter", () => {
+        startLoop();
+      });
+      img.addEventListener("mouseleave", () => {
+        stopLoop();
+        setFrame(idx);
+      });
+      img.addEventListener("touchmove", event => {
+        event.preventDefault();
+        const touch = event.touches[0];
+        if (touch) {
+          const bounds = img.getBoundingClientRect();
+          const x = touch.clientX - bounds.left;
+          const ratio = bounds.width ? Math.max(0, Math.min(1, x / bounds.width)) : 0;
+          setFrame(Math.floor(ratio * (frames.length - 1)));
+          stopLoop();
+          scheduleResume();
+        }
+      }, { passive: false });
+      document.getElementById("play").addEventListener("click", () => {
+        startLoop();
+        document.getElementById("play").classList.add("active");
+        document.getElementById("pause").classList.remove("active");
+      });
+      document.getElementById("pause").addEventListener("click", () => {
+        stopLoop();
+        document.getElementById("play").classList.remove("active");
+        document.getElementById("pause").classList.add("active");
+      });
+      document.getElementById("prev").addEventListener("click", () => {
+        setFrame(idx - 1);
+      });
+      document.getElementById("next").addEventListener("click", () => {
+        setFrame(idx + 1);
+      });
+      setFrame(idx);
+      startLoop();
+    }
+  </script>
+</body>
+</html>

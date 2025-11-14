@@ -7,6 +7,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional
@@ -14,6 +15,14 @@ from typing import Dict, List, Optional
 from PIL import Image, ImageOps
 
 Image.MAX_IMAGE_PIXELS = None
+
+
+def make_series_key(surgery: str, modality: str, series: str) -> str:
+    def _clean(value: str) -> str:
+        return re.sub(r"[^\w]+", "_", (value or "").strip()).strip("_").lower()
+
+    segments = [_clean(part) for part in (surgery, modality, series) if part]
+    return "_".join(segments) or "series"
 
 
 HTML_TEMPLATE = """<!DOCTYPE html>
@@ -262,6 +271,10 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         card.dataset.surgery = entry.surgery?.toLowerCase() || "";
         card.dataset.modality = entry.modality?.toLowerCase() || "";
         card.dataset.seriesName = entry.series?.toLowerCase() || "";
+        card.dataset.surgery = entry.surgery?.toLowerCase() || "";
+        card.dataset.modality = entry.modality?.toLowerCase() || "";
+        card.dataset.seriesName = entry.series?.toLowerCase() || "";
+        card.dataset.seriesKey = entry.series_key || "";
         card.append(heading, img);
         const badge = document.createElement("div");
         badge.className = "badge";
@@ -358,6 +371,14 @@ HTML_TEMPLATE = """<!DOCTYPE html>
           badge.classList.add("still-label");
           card.classList.add("still");
         }
+        card.addEventListener("click", () => {
+          if (entry.series_key) {
+            const url = new URL(window.location.href);
+            url.pathname = url.pathname.replace(/[^/]*$/, "player.html");
+            url.searchParams.set("series", entry.series_key);
+            window.open(url.toString(), "_blank");
+          }
+        });
         container.appendChild(card);
       });
       applyFilters();
@@ -375,6 +396,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-frames", type=int, default=0, help="How many frames per series to reference in the manifest (0=all).")
     parser.add_argument("--thumb-width", type=int, default=640, help="Maximum width for generated JPEG thumbnails.")
     parser.add_argument("--thumb-quality", type=int, default=75, help="JPEG quality (1-95) for thumbnails.")
+    parser.add_argument("--player-width", type=int, default=1400, help="Width for player frames.")
+    parser.add_argument("--player-quality", type=int, default=98, help="JPEG quality for player frames.")
     return parser.parse_args()
 
 
@@ -391,7 +414,7 @@ def read_series_info(series_dir: Path) -> Dict[str, str]:
     return info
 
 
-def build_manifest(root: Path, viewer_dir: Path, max_frames: Optional[int], thumb_width: int, thumb_quality: int) -> Dict[str, List[Dict]]:
+def build_manifest(root: Path, viewer_dir: Path, max_frames: Optional[int], thumb_width: int, thumb_quality: int, player_width: int, player_quality: int) -> Dict[str, List[Dict]]:
     html_base = viewer_dir.resolve()
     series_data: List[Dict] = []
     for surgery in sorted(p for p in root.iterdir() if p.is_dir()):
@@ -406,15 +429,14 @@ def build_manifest(root: Path, viewer_dir: Path, max_frames: Optional[int], thum
                     selected = frames[:max_frames]
                 else:
                     selected = frames
-                rel_frames = [
+                player_frames = [
                     os.path.relpath(
-                        str(create_thumbnail(frame, root, viewer_dir, series, thumb_width, thumb_quality)),
+                        str(create_player_frame(frame, root, viewer_dir, series, player_width, player_quality)),
                         str(html_base),
                     )
                     for frame in selected
                 ]
-                info = read_series_info(series)
-                info_text = ", ".join(f"{k}: {v}" for k, v in info.items() if v)
+                rel_frames = player_frames
                 preview_index = 0
                 if len(frames) > 2:
                     preview_index = len(frames) // 2
@@ -423,13 +445,16 @@ def build_manifest(root: Path, viewer_dir: Path, max_frames: Optional[int], thum
                 info = read_series_info(series)
                 info_text = ", ".join(f"{k}: {v}" for k, v in info.items() if v)
                 is_animation = len(frames) > 2
+                series_key = make_series_key(surgery.name, modality.name, series.name)
                 record = {
                     "surgery": surgery.name,
                     "modality": modality.name,
                     "series": series.name,
+                    "series_key": series_key,
                     "frame_count": len(frames),
                     "type": "animation" if is_animation else "still",
                     "frames": rel_frames,
+                    "player_frames": player_frames,
                     "info_text": info_text,
                     "preview": rel_frames[preview_index] if rel_frames else "",
                     "preview_index": preview_index,
@@ -464,12 +489,42 @@ def create_thumbnail(frame: Path, root: Path, viewer_dir: Path, series: Path, wi
     return dest
 
 
+def create_player_frame(frame: Path, root: Path, viewer_dir: Path, series: Path, width: int, quality: int) -> Path:
+    rel_series = series.relative_to(root)
+    player_dir = viewer_dir / "player" / rel_series
+    player_dir.mkdir(parents=True, exist_ok=True)
+    dest = player_dir / f"{frame.stem}.jpg"
+    if not dest.exists() or dest.stat().st_mtime < frame.stat().st_mtime:
+        with Image.open(frame) as img:
+            img = img.convert("RGB")
+            max_dim = 65500
+            scale = min(
+                1.0,
+                width / img.width if img.width else 1.0,
+                max_dim / img.height if img.height else 1.0,
+            )
+            if scale < 1.0:
+                new_width = max(1, int(img.width * scale))
+                new_height = max(1, int(img.height * scale))
+                img = img.resize((new_width, new_height), Image.LANCZOS)
+            img.save(dest, format="JPEG", quality=quality, optimize=True, progressive=True)
+    return dest
+
+
 def main() -> None:
     args = parse_args()
     if not args.root.is_dir():
         raise SystemExit(f"{args.root} does not exist or is not a directory.")
     args.viewer.mkdir(parents=True, exist_ok=True)
-    manifest = build_manifest(args.root, args.viewer, args.max_frames, args.thumb_width, args.thumb_quality)
+    manifest = build_manifest(
+        args.root,
+        args.viewer,
+        args.max_frames,
+        args.thumb_width,
+        args.thumb_quality,
+        args.player_width,
+        args.player_quality,
+    )
     manifest_path = args.viewer / "manifest.json"
     manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     index_path = args.viewer / "index.html"

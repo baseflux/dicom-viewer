@@ -16,6 +16,7 @@
 - `python3 build_quickviewer.py --root dicom_01 --viewer viewer [--max-frames 0]` – scans the organized tree, tags every series as a still or animation, writes `viewer/manifest.json`, and drops a `viewer/index.html` you can open locally to preview the data (pass `--max-frames 0` to reference every exported frame instead of the default nine).
   - `python3 sync_viewer_to_docs.py --viewer viewer --docs docs [--clean]` – copies the latest viewer output into `docs/`, purging it first if you pass `--clean`, so GitHub Pages (pointed at `docs/`) serves the viewer exactly as generated.
   - `python3 prune_docs_thumbnails.py --docs docs --sample-rate 2` – after syncing, remove every-others thumbnail from animation series and rewrite `docs/manifest.json` so the Pages site only loads the kept frames.
+- Clicking a tile now opens `viewer/player.html?series=<series_key>`, which reads `viewer/manifest.json` and plays the high-quality 98%-JPEG stack plus scrub controls; the `viewer/player` folder holds the exported frames that match the display size.
 
 ## GitHub Pages Deployment
 - After generating or updating the viewer (`build_quickviewer.py`), run `sync_viewer_to_docs.py` and commit the refreshed `docs/` folder.

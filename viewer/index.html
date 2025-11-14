@@ -244,6 +244,10 @@
         card.dataset.surgery = entry.surgery?.toLowerCase() || "";
         card.dataset.modality = entry.modality?.toLowerCase() || "";
         card.dataset.seriesName = entry.series?.toLowerCase() || "";
+        card.dataset.surgery = entry.surgery?.toLowerCase() || "";
+        card.dataset.modality = entry.modality?.toLowerCase() || "";
+        card.dataset.seriesName = entry.series?.toLowerCase() || "";
+        card.dataset.seriesKey = entry.series_key || "";
         card.append(heading, img);
         const badge = document.createElement("div");
         badge.className = "badge";
@@ -340,6 +344,14 @@
           badge.classList.add("still-label");
           card.classList.add("still");
         }
+        card.addEventListener("click", () => {
+          if (entry.series_key) {
+            const url = new URL(window.location.href);
+            url.pathname = url.pathname.replace(/[^/]*$/, "player.html");
+            url.searchParams.set("series", entry.series_key);
+            window.open(url.toString(), "_blank");
+          }
+        });
         container.appendChild(card);
       });
       applyFilters();
