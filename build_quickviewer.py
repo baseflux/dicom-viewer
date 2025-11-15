@@ -467,6 +467,12 @@ def build_manifest(root: Path, viewer_dir: Path, max_frames: Optional[int], thum
     }
 
 
+def needs_grayscale_series(series: Path) -> bool:
+    text = "/".join(part.lower() for part in series.parts)
+    keywords = ("03_neuro_brain", "05_urology", "20251031_ct_extremity_y_3d", "20251031_ct_extremity_y_3d_2")
+    return any(keyword in text for keyword in keywords)
+
+
 def create_thumbnail(frame: Path, root: Path, viewer_dir: Path, series: Path, width: int, quality: int) -> Path:
     rel_series = series.relative_to(root)
     thumb_dir = viewer_dir / "thumbnails" / rel_series
@@ -474,18 +480,22 @@ def create_thumbnail(frame: Path, root: Path, viewer_dir: Path, series: Path, wi
     dest = thumb_dir / f"{frame.stem}.jpg"
     if not dest.exists() or dest.stat().st_mtime < frame.stat().st_mtime:
         with Image.open(frame) as img:
-            img = img.convert("RGB")
+            grayscale = needs_grayscale_series(series)
+            if grayscale:
+                base = ImageOps.autocontrast(ImageOps.grayscale(img), cutoff=1).convert("RGB")
+            else:
+                base = img.convert("RGB")
             max_dim = 65500
             scale = min(
                 1.0,
-                width / img.width if img.width else 1.0,
-                max_dim / img.height if img.height else 1.0,
+                width / base.width if base.width else 1.0,
+                max_dim / base.height if base.height else 1.0,
             )
             if scale < 1.0:
-                new_width = max(1, int(img.width * scale))
-                new_height = max(1, int(img.height * scale))
-                img = img.resize((new_width, new_height), Image.LANCZOS)
-            img.save(dest, format="JPEG", quality=quality, optimize=True, progressive=True)
+                new_width = max(1, int(base.width * scale))
+                new_height = max(1, int(base.height * scale))
+                base = base.resize((new_width, new_height), Image.LANCZOS)
+            base.save(dest, format="JPEG", quality=quality, optimize=True, progressive=True)
     return dest
 
 
@@ -496,18 +506,22 @@ def create_player_frame(frame: Path, root: Path, viewer_dir: Path, series: Path,
     dest = player_dir / f"{frame.stem}.jpg"
     if not dest.exists() or dest.stat().st_mtime < frame.stat().st_mtime:
         with Image.open(frame) as img:
-            img = img.convert("RGB")
+            grayscale = needs_grayscale_series(series)
+            if grayscale:
+                base = ImageOps.autocontrast(ImageOps.grayscale(img), cutoff=1).convert("RGB")
+            else:
+                base = img.convert("RGB")
             max_dim = 65500
             scale = min(
                 1.0,
-                width / img.width if img.width else 1.0,
-                max_dim / img.height if img.height else 1.0,
+                width / base.width if base.width else 1.0,
+                max_dim / base.height if base.height else 1.0,
             )
             if scale < 1.0:
-                new_width = max(1, int(img.width * scale))
-                new_height = max(1, int(img.height * scale))
-                img = img.resize((new_width, new_height), Image.LANCZOS)
-            img.save(dest, format="JPEG", quality=quality, optimize=True, progressive=True)
+                new_width = max(1, int(base.width * scale))
+                new_height = max(1, int(base.height * scale))
+                base = base.resize((new_width, new_height), Image.LANCZOS)
+            base.save(dest, format="JPEG", quality=quality, optimize=True, progressive=True)
     return dest
 
 
